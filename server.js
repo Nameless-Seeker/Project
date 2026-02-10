@@ -10,8 +10,8 @@ dotenv.config();
 const app = express()
 //mongodb://localhost:27017 - localhost
 // Mongodb connection with  express
-// mongoose.connect("mongodb+srv://srijansarkarcoding_db_user:iOw7Ica625dg7nCn@shelf.5oudhup.mongodb.net/Shelf")
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect("mongodb+srv://srijansarkarcoding_db_user:iOw7Ica625dg7nCn@shelf.5oudhup.mongodb.net/Shelf")
+// mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("DB connected")
     })
@@ -61,7 +61,7 @@ app.get("/getShelfList", async (req, res, next) => {
 
 // URL: localhost:port/resetAllProductQty
 //Make qty of all products to 0
-
+    
 app.get("/resetAllProductQty", async (req, res, next) => {
     await Products.updateMany({}, {$set: {quantity: 0}})
 
@@ -285,7 +285,7 @@ app.use((err, req, res, next) => {
     return res.status(statusCode).json({message: message})
 })
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.listen(PORT, () => {
     console.log("Server is running")
