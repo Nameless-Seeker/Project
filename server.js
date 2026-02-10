@@ -10,8 +10,8 @@ dotenv.config();
 const app = express()
 //mongodb://localhost:27017 - localhost
 // Mongodb connection with  express
-mongoose.connect("mongodb+srv://srijansarkarcoding_db_user:iOw7Ica625dg7nCn@shelf.5oudhup.mongodb.net/Shelf")
-// mongoose.connect(process.env.MONGO_URI)
+// mongoose.connect("mongodb+srv://srijansarkarcoding_db_user:iOw7Ica625dg7nCn@shelf.5oudhup.mongodb.net/Shelf")
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("DB connected")
     })
@@ -285,7 +285,7 @@ app.use((err, req, res, next) => {
     return res.status(statusCode).json({message: message})
 })
 
-const PORT = 3000;
+const PORT = process.env.PORT | 3000;
 
 app.listen(PORT, () => {
     console.log("Server is running")
