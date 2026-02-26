@@ -1,11 +1,14 @@
 import mongoose from "mongoose"
 
-const MiningSchema = new mongoose.Schema({
+const MiningSchema = new mongoose.Schema(
+  {
     productLists: [
-        {
-            _id: String   // P001
-        }
+      {
+        _id: String
+      }
     ]
-});
+  },
+  { timestamps: true }  // 👈 THIS is where it goes
+);
 
-export default mongoose.model("PatternMining", MiningSchema)
+export default mongoose.model("PatternMining", MiningSchema);
