@@ -91,8 +91,8 @@ app.post("/:cartId/insertOneItem/:productId", async (req, res, next) => {
         {
             $inc: {
                 "items.$.quantity": 1,
-                "items.$.totalCostOfItem": product.costPricePerItem,
-                totalCartCost: product.costPricePerItem
+                "items.$.totalCostOfItem": product.sellingPricePerItem,
+                totalCartCost: product.sellingPricePerItem
             }
         },
         {new: true}
@@ -109,11 +109,11 @@ app.post("/:cartId/insertOneItem/:productId", async (req, res, next) => {
                         productId: productId,   // P001
                         productName: product.productName,
                         quantity: 1,
-                        costPerItem: product.costPricePerItem,
-                        totalCostOfItem: product.costPricePerItem
+                        costPerItem: product.sellingPricePerItem,
+                        totalCostOfItem: product.sellingPricePerItem
                     }
                 },
-                $inc: {totalCartCost: product.costPricePerItem}
+                $inc: {totalCartCost: product.sellingPricePerItem}
             },
             {
                 new: true,
@@ -158,8 +158,8 @@ app.delete("/:cartId/deleteOneItem/:productId", async (req, res, next) => {
             {
                 $inc: {
                     "items.$.quantity": -1,
-                    "items.$.totalCostOfItem": -product.costPricePerItem,
-                    totalCartCost: -product.costPricePerItem
+                    "items.$.totalCostOfItem": -product.sellingPricePerItem,
+                    totalCartCost: -product.sellingPricePerItem
                 }
             },
             {new: true}
@@ -177,7 +177,7 @@ app.delete("/:cartId/deleteOneItem/:productId", async (req, res, next) => {
             },
             {
                 $pull: {items: {productId: productId}},
-                $inc: {totalCartCost: -product.costPricePerItem}
+                $inc: {totalCartCost: -product.sellingPricePerItem}
             },
             {new: true}
         );
