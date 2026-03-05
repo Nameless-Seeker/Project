@@ -109,7 +109,8 @@ app.post("/:cartId/insertOneItem/:productId", async (req, res, next) => {
                         productId: productId,   // P001
                         productName: product.productName,
                         quantity: 1,
-                        costPerItem: product.sellingPricePerItem,
+                        costPerItem: product.costPricePerItem,
+                        sellingPricePerItem: product.sellingPricePerItem,
                         totalCostOfItem: product.sellingPricePerItem
                     }
                 },
@@ -285,8 +286,8 @@ app.use((err, req, res, next) => {
     return res.status(statusCode).json({message: message})
 })
 
-const PORT = process.env.PORT | 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log("Server is running")
+    console.log(`Server is running on Port: ${PORT}`)
 })
